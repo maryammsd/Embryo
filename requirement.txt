@@ -1,0 +1,6 @@
+# Data analysis and visualization
+pandas
+seaborn
+numpy
+matplotlib
+scipy
