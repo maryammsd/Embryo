@@ -319,7 +319,7 @@ def main_analysis(cleavage_dict):
                 current_level = 8
             print(f"Child ID in depiction: {child_id} with cleavage data {cleavage_data[child_id].cleavage_timestamp}, {cleavage_data[child_id].parent_cleavage_timestamp   }")
             cleavage_info = cleavage_data[child_id]
-            if cleavage_info.level <= 4:
+            if cleavage_info.level <= 8:
                 continue
             level = cleavage_info.level
             if level not in longetivity_level_child:
@@ -333,18 +333,18 @@ def main_analysis(cleavage_dict):
             #    if float(cleavage_info.parent_cleavage_timestamp) > 25 and  float(cleavage_info.parent_cleavage_timestamp) < 60 :
             if level == 16:
                 x_values.append(float(cleavage_info.cleavage_timestamp *  15 / 60))
-                y_values.append(float(cleavage_info.parent_cleavage_timestamp *  15 / 60))            
+                y_values.append(float(cleavage_info.parent_cleavage_timestamp *  15 / 60)) 
+                levels.append(cleavage_info.level)           
             if current_level not in longetivity_by_time:
                 longetivity_by_time[current_level] = []
             longetivity_by_time[current_level].append(float(cleavage_info.cleavage_timestamp *  15 / 60))
             current_level += 1
-            levels.append(cleavage_info.level)
 
     # Depict scatter plot
     depict_scatter_plot(x_values, y_values)
 
     # Depict scatter plot with lowess
-    depict_scatter_with_lowess(x_values, y_values)
+    #depict_scatter_with_lowess(x_values, y_values)
 
     # depict scatter plot with special age range
     parent_child_special_age(x_values, y_values)
@@ -396,7 +396,7 @@ def print_cleavage_data():
             print(f"  Parent ID: {cleavage_info.parent_id}")
             print(f"  Cleavage Hour: {cleavage_info.cleavage_timestamp}")
             print(f"  Parent Cleavage Hour: {cleavage_info.parent_cleavage_timestamp}")
-            print(f"  Level: {cleavage_info.level}")
+            print(f" {cleavage_info.level/2} to {cleavage_info.level}")
             print(f"  Species Type: {cleavage_info.species_type}")
             print(f"  Embryo Info: {cleavage_info.embryo_info}")
             print("-----")
